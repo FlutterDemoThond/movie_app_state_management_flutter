@@ -1,0 +1,855 @@
+@startuml
+set namespaceSeparator ::
+
+class "core::ui::scrollable_movies_page_builder.dart::ScrollableMoviesPageBuilder" {
+  +dynamic title
+  +dynamic Function(BuildContext, ScrollController) builder
+  +void Function() onNextPageRequested
+  +_ScrollableMoviesPageBuilderState createState()
+}
+
+"core::ui::scrollable_movies_page_builder.dart::ScrollableMoviesPageBuilder" o-- "core::ui::scrollable_movies_page_builder.dart::dynamic Function(BuildContext, ScrollController)"
+"core::ui::scrollable_movies_page_builder.dart::ScrollableMoviesPageBuilder" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "core::ui::scrollable_movies_page_builder.dart::ScrollableMoviesPageBuilder"
+
+class "core::ui::scrollable_movies_page_builder.dart::_ScrollableMoviesPageBuilderState" {
+  -ScrollController _scrollController
+  -double _scrollThreshold
+  +void initState()
+  +void dispose()
+  -void _onScroll()
+  +Widget build()
+}
+
+"core::ui::scrollable_movies_page_builder.dart::_ScrollableMoviesPageBuilderState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "core::ui::scrollable_movies_page_builder.dart::_ScrollableMoviesPageBuilderState"
+
+class "core::ui::profile_grid_item.dart::ProfileGridItem" {
+  +Profile profile
+  +bool selected
+  +void Function() onPressed
+  +Widget build()
+}
+
+"core::ui::profile_grid_item.dart::ProfileGridItem" o-- "core::models::app_models::profile.dart::Profile"
+"core::ui::profile_grid_item.dart::ProfileGridItem" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::profile_grid_item.dart::ProfileGridItem"
+
+class "core::ui::profile_grid_item.dart::ProfileFaceBox" {
+  +bool selected
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::profile_grid_item.dart::ProfileFaceBox"
+
+class "core::ui::profile_grid_item.dart::FaceOutlinePainter" {
+  +bool selected
+  +void paint()
+  +bool shouldRepaint()
+}
+
+"flutter::src::rendering::custom_paint.dart::CustomPainter" <|-- "core::ui::profile_grid_item.dart::FaceOutlinePainter"
+
+class "core::ui::movies_grid.dart::MoviesGrid" {
+  +List<TMDBMovieBasic> movies
+  +ScrollController controller
+  +Widget Function(BuildContext, TMDBMovieBasic) favouriteBuilder
+  +Widget build()
+}
+
+"core::ui::movies_grid.dart::MoviesGrid" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"core::ui::movies_grid.dart::MoviesGrid" o-- "core::ui::movies_grid.dart::Widget Function(BuildContext, TMDBMovieBasic)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::movies_grid.dart::MoviesGrid"
+
+class "core::ui::create_profile_page.dart::CreateProfilePage" {
+  +bool isLoading
+  +dynamic errorText
+  +dynamic Function(dynamic) onSubmit
+  +_CreateProfilePageState createState()
+}
+
+"core::ui::create_profile_page.dart::CreateProfilePage" o-- "core::ui::create_profile_page.dart::dynamic Function(dynamic)"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "core::ui::create_profile_page.dart::CreateProfilePage"
+
+class "core::ui::create_profile_page.dart::_CreateProfilePageState" {
+  +TextEditingController controller
+  +Widget build()
+}
+
+"core::ui::create_profile_page.dart::_CreateProfilePageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "core::ui::create_profile_page.dart::_CreateProfilePageState"
+
+class "core::ui::favourite_button.dart::FavouriteButton" {
+  +bool isFavourite
+  +void Function(bool) onFavouriteChanged
+  +Widget build()
+}
+
+"core::ui::favourite_button.dart::FavouriteButton" o-- "flutter::src::foundation::basic_types.dart::void Function(bool)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::favourite_button.dart::FavouriteButton"
+
+class "core::ui::poster_tile.dart::PosterTile" {
+  +dynamic imagePath
+  +int debugIndex
+  +Widget Function(BuildContext) favouriteBuilder
+  +Widget build()
+}
+
+"core::ui::poster_tile.dart::PosterTile" o-- "flutter::src::widgets::framework.dart::Widget Function(BuildContext)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::poster_tile.dart::PosterTile"
+
+class "core::ui::poster_tile.dart::TopGradient" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::poster_tile.dart::TopGradient"
+
+class "core::ui::poster_tile.dart::_Poster" {
+  +dynamic imagePath
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::poster_tile.dart::_Poster"
+
+class "core::ui::add_profile_button.dart::AddProfileButton" {
+  +void Function() onPressed
+  +Widget build()
+}
+
+"core::ui::add_profile_button.dart::AddProfileButton" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::add_profile_button.dart::AddProfileButton"
+
+class "core::ui::home_navigation_builder.dart::TabItem" {
+  +int index
+  {static} +List<TabItem> values
+  {static} +TabItem nowPlaying
+  {static} +TabItem favourites
+  {static} +TabItem profiles
+}
+
+"core::ui::home_navigation_builder.dart::TabItem" o-- "core::ui::home_navigation_builder.dart::TabItem"
+
+class "core::ui::home_navigation_builder.dart::HomeNavigationBuilder" {
+  +Widget Function(BuildContext, TabItem) builder
+  +_HomeNavigationBuilderState createState()
+}
+
+"core::ui::home_navigation_builder.dart::HomeNavigationBuilder" o-- "core::ui::home_navigation_builder.dart::Widget Function(BuildContext, TabItem)"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "core::ui::home_navigation_builder.dart::HomeNavigationBuilder"
+
+class "core::ui::home_navigation_builder.dart::_HomeNavigationBuilderState" {
+  -TabItem _currentTab
+  +Widget build()
+}
+
+"core::ui::home_navigation_builder.dart::_HomeNavigationBuilderState" o-- "core::ui::home_navigation_builder.dart::TabItem"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "core::ui::home_navigation_builder.dart::_HomeNavigationBuilderState"
+
+class "core::ui::home_navigation_builder.dart::BottomNavigation" {
+  +TabItem currentTab
+  +void Function(TabItem) onSelectTab
+  +Widget build()
+}
+
+"core::ui::home_navigation_builder.dart::BottomNavigation" o-- "core::ui::home_navigation_builder.dart::TabItem"
+"core::ui::home_navigation_builder.dart::BottomNavigation" o-- "flutter::src::foundation::basic_types.dart::void Function(TabItem)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::home_navigation_builder.dart::BottomNavigation"
+
+class "core::ui::profiles_grid.dart::ProfilesGrid" {
+  +ProfilesData profilesData
+  +void Function(Profile) onSelectedProfile
+  +void Function() onAddProfile
+  +Widget build()
+}
+
+"core::ui::profiles_grid.dart::ProfilesGrid" o-- "core::models::app_models::profiles_data.dart::ProfilesData"
+"core::ui::profiles_grid.dart::ProfilesGrid" o-- "flutter::src::foundation::basic_types.dart::void Function(Profile)"
+"core::ui::profiles_grid.dart::ProfilesGrid" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "core::ui::profiles_grid.dart::ProfilesGrid"
+
+class "core::models::app_models::profile.dart::Profile" {
+  +String id
+  +String name
+  +int hashCode
+  +Profile copyWith()
+  +Map toMap()
+  +String toJson()
+  +String toString()
+  +bool ==()
+}
+
+class "core::models::app_models::movies_data.dart::MoviesData" {
+  +Map<int, TMDBMovieBasic> movies
+  +int hashCode
+  +Map toMap()
+  +String toJson()
+  +String toString()
+  +bool ==()
+}
+
+class "core::models::app_models::favourite_movies.dart::FavouriteMovies" {
+  +Set<int> favouriteIDs
+  +int hashCode
+  +String toJson()
+  +String toString()
+  +bool ==()
+}
+
+class "core::models::app_models::profiles_data.dart::ProfilesData" {
+  +Map<String, Profile> profiles
+  +String selectedId
+  +int hashCode
+  +List sortedByName()
+  +String toJson()
+  +String toString()
+  +bool ==()
+  +ProfilesData copyWith()
+  +Map toMap()
+}
+
+abstract class "core::models::tmdb::tmdb_movie_basic.dart::TMDBMovieBasic" {
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasic" <|-- "core::models::tmdb::tmdb_movie_basic.dart::TMDBMovieBasic"
+
+abstract class "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasic" {
+  +int voteCount
+  +int id
+  +bool video
+  +double voteAverage
+  +String title
+  +double popularity
+  +String posterPath
+  +String originalLanguage
+  +String originalTitle
+  +List<int> genreIds
+  +String backdropPath
+  +bool adult
+  +String overview
+  +String releaseDate
+  +$TMDBMovieBasicCopyWith<TMDBMovieBasic> copyWith
+  +Map toJson()
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasic" o-- "core::models::tmdb::tmdb_movie_basic.dart::$TMDBMovieBasicCopyWith<TMDBMovieBasic>"
+
+class "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicTearOff" {
+  +_TMDBMovieBasic call()
+  +TMDBMovieBasic fromJson()
+}
+
+abstract class "core::models::tmdb::tmdb_movie_basic.dart::$TMDBMovieBasicCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWithImpl<$Res>" {
+  -TMDBMovieBasic _value
+  -$Res Function(TMDBMovieBasic) _then
+  +$Res call()
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWithImpl<$Res>" o-- "core::models::tmdb::tmdb_movie_basic.dart::TMDBMovieBasic"
+"core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWithImpl<$Res>" o-- "core::models::tmdb::tmdb_movie_basic.dart::$Res Function(TMDBMovieBasic)"
+"core::models::tmdb::tmdb_movie_basic.dart::$TMDBMovieBasicCopyWith<$Res>" <|-- "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWithImpl<$Res>"
+
+abstract class "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWith<$Res>" {
+  +$Res call()
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::$TMDBMovieBasicCopyWith<$Res>" <|-- "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWith<$Res>"
+
+class "core::models::tmdb::tmdb_movie_basic.dart::__$TMDBMovieBasicCopyWithImpl<$Res>" {
+  -_TMDBMovieBasic _value
+  +$Res call()
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::__$TMDBMovieBasicCopyWithImpl<$Res>" o-- "core::models::tmdb::tmdb_movie_basic.dart::_TMDBMovieBasic"
+"core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWithImpl<$Res>" <|-- "core::models::tmdb::tmdb_movie_basic.dart::__$TMDBMovieBasicCopyWithImpl<$Res>"
+"core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWith<$Res>" <|-- "core::models::tmdb::tmdb_movie_basic.dart::__$TMDBMovieBasicCopyWithImpl<$Res>"
+
+class "core::models::tmdb::tmdb_movie_basic.dart::_$_TMDBMovieBasic" {
+  +int voteCount
+  +int id
+  +bool video
+  +double voteAverage
+  +String title
+  +double popularity
+  +String posterPath
+  +String originalLanguage
+  +String originalTitle
+  +List<int> genreIds
+  +String backdropPath
+  +bool adult
+  +String overview
+  +String releaseDate
+  +int hashCode
+  +_$TMDBMovieBasicCopyWith<_TMDBMovieBasic> copyWith
+  +String toString()
+  +bool ==()
+  +Map toJson()
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::_$_TMDBMovieBasic" o-- "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWith<_TMDBMovieBasic>"
+"core::models::tmdb::tmdb_movie_basic.dart::_TMDBMovieBasic" <|-- "core::models::tmdb::tmdb_movie_basic.dart::_$_TMDBMovieBasic"
+
+abstract class "core::models::tmdb::tmdb_movie_basic.dart::_TMDBMovieBasic" {
+  +int voteCount
+  +int id
+  +bool video
+  +double voteAverage
+  +String title
+  +double popularity
+  +String posterPath
+  +String originalLanguage
+  +String originalTitle
+  +List<int> genreIds
+  +String backdropPath
+  +bool adult
+  +String overview
+  +String releaseDate
+  +_$TMDBMovieBasicCopyWith<_TMDBMovieBasic> copyWith
+}
+
+"core::models::tmdb::tmdb_movie_basic.dart::_TMDBMovieBasic" o-- "core::models::tmdb::tmdb_movie_basic.dart::_$TMDBMovieBasicCopyWith<_TMDBMovieBasic>"
+"core::models::tmdb::tmdb_movie_basic.dart::TMDBMovieBasic" <|-- "core::models::tmdb::tmdb_movie_basic.dart::_TMDBMovieBasic"
+
+abstract class "core::models::tmdb::tmdb_movies_response.dart::TMDBMoviesResponse" {
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponse" <|-- "core::models::tmdb::tmdb_movies_response.dart::TMDBMoviesResponse"
+
+abstract class "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponse" {
+  +int page
+  +List<TMDBMovieBasic> results
+  +int totalResults
+  +int totalPages
+  +List<String> errors
+  +$TMDBMoviesResponseCopyWith copyWith
+  +Map toJson()
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponse" o-- "core::models::tmdb::tmdb_movies_response.dart::$TMDBMoviesResponseCopyWith"
+
+class "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseTearOff" {
+  +_TMDBMoviesResponse call()
+  +dynamic fromJson()
+}
+
+abstract class "core::models::tmdb::tmdb_movies_response.dart::$TMDBMoviesResponseCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWithImpl<$Res>" {
+  -dynamic _value
+  -$Res Function(dynamic) _then
+  +$Res call()
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWithImpl<$Res>" o-- "core::models::tmdb::tmdb_movies_response.dart::$Res Function(dynamic)"
+"core::models::tmdb::tmdb_movies_response.dart::$TMDBMoviesResponseCopyWith<$Res>" <|-- "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWithImpl<$Res>"
+
+abstract class "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWith<$Res>" {
+  +$Res call()
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::$TMDBMoviesResponseCopyWith<$Res>" <|-- "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWith<$Res>"
+
+class "core::models::tmdb::tmdb_movies_response.dart::__$TMDBMoviesResponseCopyWithImpl<$Res>" {
+  -_TMDBMoviesResponse _value
+  +$Res call()
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::__$TMDBMoviesResponseCopyWithImpl<$Res>" o-- "core::models::tmdb::tmdb_movies_response.dart::_TMDBMoviesResponse"
+"core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWithImpl<$Res>" <|-- "core::models::tmdb::tmdb_movies_response.dart::__$TMDBMoviesResponseCopyWithImpl<$Res>"
+"core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWith<$Res>" <|-- "core::models::tmdb::tmdb_movies_response.dart::__$TMDBMoviesResponseCopyWithImpl<$Res>"
+
+class "core::models::tmdb::tmdb_movies_response.dart::_$_TMDBMoviesResponse" {
+  +int page
+  +List<TMDBMovieBasic> results
+  +int totalResults
+  +int totalPages
+  +List<String> errors
+  +int hashCode
+  +_$TMDBMoviesResponseCopyWith<_TMDBMoviesResponse> copyWith
+  +String toString()
+  +bool ==()
+  +Map toJson()
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::_$_TMDBMoviesResponse" o-- "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWith<_TMDBMoviesResponse>"
+"core::models::tmdb::tmdb_movies_response.dart::_TMDBMoviesResponse" <|-- "core::models::tmdb::tmdb_movies_response.dart::_$_TMDBMoviesResponse"
+
+abstract class "core::models::tmdb::tmdb_movies_response.dart::_TMDBMoviesResponse" {
+  +int page
+  +List<TMDBMovieBasic> results
+  +int totalResults
+  +int totalPages
+  +List<String> errors
+  +_$TMDBMoviesResponseCopyWith<_TMDBMoviesResponse> copyWith
+}
+
+"core::models::tmdb::tmdb_movies_response.dart::_TMDBMoviesResponse" o-- "core::models::tmdb::tmdb_movies_response.dart::_$TMDBMoviesResponseCopyWith<_TMDBMoviesResponse>"
+
+abstract class "core::models::app_state::now_playing_state.dart::NowPlayingState" {
+}
+
+"core::models::app_state::now_playing_state.dart::_$NowPlayingState" <|-- "core::models::app_state::now_playing_state.dart::NowPlayingState"
+
+abstract class "core::models::app_state::now_playing_state.dart::_$NowPlayingState" {
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+class "core::models::app_state::now_playing_state.dart::_$NowPlayingStateTearOff" {
+  +_Data data()
+  +_DataLoading dataLoading()
+  +_Error error()
+}
+
+abstract class "core::models::app_state::now_playing_state.dart::$NowPlayingStateCopyWith<$Res>" {
+}
+
+class "core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>" {
+  -NowPlayingState _value
+  -$Res Function(NowPlayingState) _then
+}
+
+"core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>" o-- "core::models::app_state::now_playing_state.dart::NowPlayingState"
+"core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>" o-- "core::models::app_state::now_playing_state.dart::$Res Function(NowPlayingState)"
+"core::models::app_state::now_playing_state.dart::$NowPlayingStateCopyWith<$Res>" <|-- "core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>"
+
+abstract class "core::models::app_state::now_playing_state.dart::_$DataCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::app_state::now_playing_state.dart::__$DataCopyWithImpl<$Res>" {
+  -_Data _value
+  +$Res call()
+}
+
+"core::models::app_state::now_playing_state.dart::__$DataCopyWithImpl<$Res>" o-- "core::models::app_state::now_playing_state.dart::_Data"
+"core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>" <|-- "core::models::app_state::now_playing_state.dart::__$DataCopyWithImpl<$Res>"
+"core::models::app_state::now_playing_state.dart::_$DataCopyWith<$Res>" <|-- "core::models::app_state::now_playing_state.dart::__$DataCopyWithImpl<$Res>"
+
+class "core::models::app_state::now_playing_state.dart::_$_Data" {
+  +List<TMDBMovieBasic> movies
+  +bool hasReachedMax
+  +int hashCode
+  +_$DataCopyWith<_Data> copyWith
+  +dynamic toString()
+  +void debugFillProperties()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::now_playing_state.dart::_$_Data" o-- "core::models::app_state::now_playing_state.dart::_$DataCopyWith<_Data>"
+"flutter::src::foundation::diagnostics.dart::DiagnosticableTreeMixin" <|-- "core::models::app_state::now_playing_state.dart::_$_Data"
+"core::models::app_state::now_playing_state.dart::_Data" <|-- "core::models::app_state::now_playing_state.dart::_$_Data"
+
+abstract class "core::models::app_state::now_playing_state.dart::_Data" {
+  +List<TMDBMovieBasic> movies
+  +bool hasReachedMax
+  +_$DataCopyWith<_Data> copyWith
+}
+
+"core::models::app_state::now_playing_state.dart::_Data" o-- "core::models::app_state::now_playing_state.dart::_$DataCopyWith<_Data>"
+"core::models::app_state::now_playing_state.dart::NowPlayingState" <|-- "core::models::app_state::now_playing_state.dart::_Data"
+
+abstract class "core::models::app_state::now_playing_state.dart::_$DataLoadingCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::app_state::now_playing_state.dart::__$DataLoadingCopyWithImpl<$Res>" {
+  -_DataLoading _value
+  +$Res call()
+}
+
+"core::models::app_state::now_playing_state.dart::__$DataLoadingCopyWithImpl<$Res>" o-- "core::models::app_state::now_playing_state.dart::_DataLoading"
+"core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>" <|-- "core::models::app_state::now_playing_state.dart::__$DataLoadingCopyWithImpl<$Res>"
+"core::models::app_state::now_playing_state.dart::_$DataLoadingCopyWith<$Res>" <|-- "core::models::app_state::now_playing_state.dart::__$DataLoadingCopyWithImpl<$Res>"
+
+class "core::models::app_state::now_playing_state.dart::_$_DataLoading" {
+  +List<TMDBMovieBasic> movies
+  +int hashCode
+  +_$DataLoadingCopyWith<_DataLoading> copyWith
+  +dynamic toString()
+  +void debugFillProperties()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::now_playing_state.dart::_$_DataLoading" o-- "core::models::app_state::now_playing_state.dart::_$DataLoadingCopyWith<_DataLoading>"
+"flutter::src::foundation::diagnostics.dart::DiagnosticableTreeMixin" <|-- "core::models::app_state::now_playing_state.dart::_$_DataLoading"
+"core::models::app_state::now_playing_state.dart::_DataLoading" <|-- "core::models::app_state::now_playing_state.dart::_$_DataLoading"
+
+abstract class "core::models::app_state::now_playing_state.dart::_DataLoading" {
+  +List<TMDBMovieBasic> movies
+  +_$DataLoadingCopyWith<_DataLoading> copyWith
+}
+
+"core::models::app_state::now_playing_state.dart::_DataLoading" o-- "core::models::app_state::now_playing_state.dart::_$DataLoadingCopyWith<_DataLoading>"
+"core::models::app_state::now_playing_state.dart::NowPlayingState" <|-- "core::models::app_state::now_playing_state.dart::_DataLoading"
+
+abstract class "core::models::app_state::now_playing_state.dart::_$ErrorCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::app_state::now_playing_state.dart::__$ErrorCopyWithImpl<$Res>" {
+  -_Error _value
+  +$Res call()
+}
+
+"core::models::app_state::now_playing_state.dart::__$ErrorCopyWithImpl<$Res>" o-- "core::models::app_state::now_playing_state.dart::_Error"
+"core::models::app_state::now_playing_state.dart::_$NowPlayingStateCopyWithImpl<$Res>" <|-- "core::models::app_state::now_playing_state.dart::__$ErrorCopyWithImpl<$Res>"
+"core::models::app_state::now_playing_state.dart::_$ErrorCopyWith<$Res>" <|-- "core::models::app_state::now_playing_state.dart::__$ErrorCopyWithImpl<$Res>"
+
+class "core::models::app_state::now_playing_state.dart::_$_Error" {
+  +dynamic error
+  +int hashCode
+  +_$ErrorCopyWith<_Error> copyWith
+  +dynamic toString()
+  +void debugFillProperties()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::now_playing_state.dart::_$_Error" o-- "core::models::app_state::now_playing_state.dart::_$ErrorCopyWith<_Error>"
+"flutter::src::foundation::diagnostics.dart::DiagnosticableTreeMixin" <|-- "core::models::app_state::now_playing_state.dart::_$_Error"
+"core::models::app_state::now_playing_state.dart::_Error" <|-- "core::models::app_state::now_playing_state.dart::_$_Error"
+
+abstract class "core::models::app_state::now_playing_state.dart::_Error" {
+  +dynamic error
+  +_$ErrorCopyWith<_Error> copyWith
+}
+
+"core::models::app_state::now_playing_state.dart::_Error" o-- "core::models::app_state::now_playing_state.dart::_$ErrorCopyWith<_Error>"
+"core::models::app_state::now_playing_state.dart::NowPlayingState" <|-- "core::models::app_state::now_playing_state.dart::_Error"
+
+abstract class "core::models::app_state::create_profile_state.dart::CreateProfileState" {
+}
+
+"core::models::app_state::create_profile_state.dart::_$CreateProfileState" <|-- "core::models::app_state::create_profile_state.dart::CreateProfileState"
+
+abstract class "core::models::app_state::create_profile_state.dart::_$CreateProfileState" {
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+class "core::models::app_state::create_profile_state.dart::_$CreateProfileStateTearOff" {
+  +_NoError noError()
+  +_Error error()
+  +_Loading loading()
+}
+
+abstract class "core::models::app_state::create_profile_state.dart::$CreateProfileStateCopyWith<$Res>" {
+}
+
+class "core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>" {
+  -CreateProfileState _value
+  -$Res Function(CreateProfileState) _then
+}
+
+"core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>" o-- "core::models::app_state::create_profile_state.dart::CreateProfileState"
+"core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>" o-- "core::models::app_state::create_profile_state.dart::$Res Function(CreateProfileState)"
+"core::models::app_state::create_profile_state.dart::$CreateProfileStateCopyWith<$Res>" <|-- "core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>"
+
+abstract class "core::models::app_state::create_profile_state.dart::_$NoErrorCopyWith<$Res>" {
+}
+
+class "core::models::app_state::create_profile_state.dart::__$NoErrorCopyWithImpl<$Res>" {
+  -_NoError _value
+}
+
+"core::models::app_state::create_profile_state.dart::__$NoErrorCopyWithImpl<$Res>" o-- "core::models::app_state::create_profile_state.dart::_NoError"
+"core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>" <|-- "core::models::app_state::create_profile_state.dart::__$NoErrorCopyWithImpl<$Res>"
+"core::models::app_state::create_profile_state.dart::_$NoErrorCopyWith<$Res>" <|-- "core::models::app_state::create_profile_state.dart::__$NoErrorCopyWithImpl<$Res>"
+
+class "core::models::app_state::create_profile_state.dart::_$_NoError" {
+  +int hashCode
+  +String toString()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::create_profile_state.dart::_NoError" <|-- "core::models::app_state::create_profile_state.dart::_$_NoError"
+
+abstract class "core::models::app_state::create_profile_state.dart::_NoError" {
+}
+
+"core::models::app_state::create_profile_state.dart::CreateProfileState" <|-- "core::models::app_state::create_profile_state.dart::_NoError"
+
+abstract class "core::models::app_state::create_profile_state.dart::_$ErrorCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::app_state::create_profile_state.dart::__$ErrorCopyWithImpl<$Res>" {
+  -_Error _value
+  +$Res call()
+}
+
+"core::models::app_state::create_profile_state.dart::__$ErrorCopyWithImpl<$Res>" o-- "core::models::app_state::create_profile_state.dart::_Error"
+"core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>" <|-- "core::models::app_state::create_profile_state.dart::__$ErrorCopyWithImpl<$Res>"
+"core::models::app_state::create_profile_state.dart::_$ErrorCopyWith<$Res>" <|-- "core::models::app_state::create_profile_state.dart::__$ErrorCopyWithImpl<$Res>"
+
+class "core::models::app_state::create_profile_state.dart::_$_Error" {
+  +String errorText
+  +int hashCode
+  +_$ErrorCopyWith<_Error> copyWith
+  +String toString()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::create_profile_state.dart::_$_Error" o-- "core::models::app_state::create_profile_state.dart::_$ErrorCopyWith<_Error>"
+"core::models::app_state::create_profile_state.dart::_Error" <|-- "core::models::app_state::create_profile_state.dart::_$_Error"
+
+abstract class "core::models::app_state::create_profile_state.dart::_Error" {
+  +String errorText
+  +_$ErrorCopyWith<_Error> copyWith
+}
+
+"core::models::app_state::create_profile_state.dart::_Error" o-- "core::models::app_state::create_profile_state.dart::_$ErrorCopyWith<_Error>"
+"core::models::app_state::create_profile_state.dart::CreateProfileState" <|-- "core::models::app_state::create_profile_state.dart::_Error"
+
+abstract class "core::models::app_state::create_profile_state.dart::_$LoadingCopyWith<$Res>" {
+}
+
+class "core::models::app_state::create_profile_state.dart::__$LoadingCopyWithImpl<$Res>" {
+  -_Loading _value
+}
+
+"core::models::app_state::create_profile_state.dart::__$LoadingCopyWithImpl<$Res>" o-- "core::models::app_state::create_profile_state.dart::_Loading"
+"core::models::app_state::create_profile_state.dart::_$CreateProfileStateCopyWithImpl<$Res>" <|-- "core::models::app_state::create_profile_state.dart::__$LoadingCopyWithImpl<$Res>"
+"core::models::app_state::create_profile_state.dart::_$LoadingCopyWith<$Res>" <|-- "core::models::app_state::create_profile_state.dart::__$LoadingCopyWithImpl<$Res>"
+
+class "core::models::app_state::create_profile_state.dart::_$_Loading" {
+  +int hashCode
+  +String toString()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::create_profile_state.dart::_Loading" <|-- "core::models::app_state::create_profile_state.dart::_$_Loading"
+
+abstract class "core::models::app_state::create_profile_state.dart::_Loading" {
+}
+
+"core::models::app_state::create_profile_state.dart::CreateProfileState" <|-- "core::models::app_state::create_profile_state.dart::_Loading"
+
+abstract class "core::models::app_state::app_startup_state.dart::AppStartupState" {
+}
+
+"core::models::app_state::app_startup_state.dart::_$AppStartupState" <|-- "core::models::app_state::app_startup_state.dart::AppStartupState"
+
+abstract class "core::models::app_state::app_startup_state.dart::_$AppStartupState" {
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+class "core::models::app_state::app_startup_state.dart::_$AppStartupStateTearOff" {
+  +_Initializing initializing()
+  +_NeedsProfile needsProfile()
+  +_ProfileLoaded profileLoaded()
+}
+
+abstract class "core::models::app_state::app_startup_state.dart::$AppStartupStateCopyWith<$Res>" {
+}
+
+class "core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>" {
+  -AppStartupState _value
+  -$Res Function(AppStartupState) _then
+}
+
+"core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>" o-- "core::models::app_state::app_startup_state.dart::AppStartupState"
+"core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>" o-- "core::models::app_state::app_startup_state.dart::$Res Function(AppStartupState)"
+"core::models::app_state::app_startup_state.dart::$AppStartupStateCopyWith<$Res>" <|-- "core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>"
+
+abstract class "core::models::app_state::app_startup_state.dart::_$InitializingCopyWith<$Res>" {
+}
+
+class "core::models::app_state::app_startup_state.dart::__$InitializingCopyWithImpl<$Res>" {
+  -_Initializing _value
+}
+
+"core::models::app_state::app_startup_state.dart::__$InitializingCopyWithImpl<$Res>" o-- "core::models::app_state::app_startup_state.dart::_Initializing"
+"core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>" <|-- "core::models::app_state::app_startup_state.dart::__$InitializingCopyWithImpl<$Res>"
+"core::models::app_state::app_startup_state.dart::_$InitializingCopyWith<$Res>" <|-- "core::models::app_state::app_startup_state.dart::__$InitializingCopyWithImpl<$Res>"
+
+class "core::models::app_state::app_startup_state.dart::_$_Initializing" {
+  +int hashCode
+  +String toString()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::app_startup_state.dart::_Initializing" <|-- "core::models::app_state::app_startup_state.dart::_$_Initializing"
+
+abstract class "core::models::app_state::app_startup_state.dart::_Initializing" {
+}
+
+"core::models::app_state::app_startup_state.dart::AppStartupState" <|-- "core::models::app_state::app_startup_state.dart::_Initializing"
+
+abstract class "core::models::app_state::app_startup_state.dart::_$NeedsProfileCopyWith<$Res>" {
+}
+
+class "core::models::app_state::app_startup_state.dart::__$NeedsProfileCopyWithImpl<$Res>" {
+  -_NeedsProfile _value
+}
+
+"core::models::app_state::app_startup_state.dart::__$NeedsProfileCopyWithImpl<$Res>" o-- "core::models::app_state::app_startup_state.dart::_NeedsProfile"
+"core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>" <|-- "core::models::app_state::app_startup_state.dart::__$NeedsProfileCopyWithImpl<$Res>"
+"core::models::app_state::app_startup_state.dart::_$NeedsProfileCopyWith<$Res>" <|-- "core::models::app_state::app_startup_state.dart::__$NeedsProfileCopyWithImpl<$Res>"
+
+class "core::models::app_state::app_startup_state.dart::_$_NeedsProfile" {
+  +int hashCode
+  +String toString()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::app_startup_state.dart::_NeedsProfile" <|-- "core::models::app_state::app_startup_state.dart::_$_NeedsProfile"
+
+abstract class "core::models::app_state::app_startup_state.dart::_NeedsProfile" {
+}
+
+"core::models::app_state::app_startup_state.dart::AppStartupState" <|-- "core::models::app_state::app_startup_state.dart::_NeedsProfile"
+
+abstract class "core::models::app_state::app_startup_state.dart::_$ProfileLoadedCopyWith<$Res>" {
+  +$Res call()
+}
+
+class "core::models::app_state::app_startup_state.dart::__$ProfileLoadedCopyWithImpl<$Res>" {
+  -_ProfileLoaded _value
+  +$Res call()
+}
+
+"core::models::app_state::app_startup_state.dart::__$ProfileLoadedCopyWithImpl<$Res>" o-- "core::models::app_state::app_startup_state.dart::_ProfileLoaded"
+"core::models::app_state::app_startup_state.dart::_$AppStartupStateCopyWithImpl<$Res>" <|-- "core::models::app_state::app_startup_state.dart::__$ProfileLoadedCopyWithImpl<$Res>"
+"core::models::app_state::app_startup_state.dart::_$ProfileLoadedCopyWith<$Res>" <|-- "core::models::app_state::app_startup_state.dart::__$ProfileLoadedCopyWithImpl<$Res>"
+
+class "core::models::app_state::app_startup_state.dart::_$_ProfileLoaded" {
+  +ProfilesData profilesData
+  +int hashCode
+  +_$ProfileLoadedCopyWith<_ProfileLoaded> copyWith
+  +String toString()
+  +bool ==()
+  +TResult when()
+  +TResult maybeWhen()
+  +TResult map()
+  +TResult maybeMap()
+}
+
+"core::models::app_state::app_startup_state.dart::_$_ProfileLoaded" o-- "core::models::app_models::profiles_data.dart::ProfilesData"
+"core::models::app_state::app_startup_state.dart::_$_ProfileLoaded" o-- "core::models::app_state::app_startup_state.dart::_$ProfileLoadedCopyWith<_ProfileLoaded>"
+"core::models::app_state::app_startup_state.dart::_ProfileLoaded" <|-- "core::models::app_state::app_startup_state.dart::_$_ProfileLoaded"
+
+abstract class "core::models::app_state::app_startup_state.dart::_ProfileLoaded" {
+  +ProfilesData profilesData
+  +_$ProfileLoadedCopyWith<_ProfileLoaded> copyWith
+}
+
+"core::models::app_state::app_startup_state.dart::_ProfileLoaded" o-- "core::models::app_models::profiles_data.dart::ProfilesData"
+"core::models::app_state::app_startup_state.dart::_ProfileLoaded" o-- "core::models::app_state::app_startup_state.dart::_$ProfileLoadedCopyWith<_ProfileLoaded>"
+"core::models::app_state::app_startup_state.dart::AppStartupState" <|-- "core::models::app_state::app_startup_state.dart::_ProfileLoaded"
+
+class "core::persistence::sembast_data_store.dart::StorePath" {
+  {static} +String profiles
+  {static} +String movies
+  {static} +String favouriteMovie()
+  {static} +String favouriteMovies()
+}
+
+class "core::persistence::sembast_data_store.dart::SembastDataStore" {
+  {static} +DatabaseFactory dbFactory
+  +Database db
+  +StoreRef store
+  {static} +dynamic makeDefault()
+  {static} +dynamic init()
+  +dynamic createProfile()
+  +dynamic setSelectedProfile()
+  +dynamic profilesData()
+  +dynamic getProfilesData()
+  +dynamic profileExistsWithName()
+  +dynamic setFavouriteMovie()
+  -dynamic _storeMovie()
+  +dynamic favouriteMovie()
+  +dynamic allSavedMovies()
+  +dynamic favouriteMovieIDs()
+  +dynamic favouriteMovies()
+}
+
+"core::persistence::sembast_data_store.dart::SembastDataStore" o-- "sembast::src::api::v2::factory.dart::DatabaseFactory"
+"core::persistence::sembast_data_store.dart::SembastDataStore" o-- "sembast::src::api::v2::database.dart::Database"
+"core::persistence::sembast_data_store.dart::SembastDataStore" o-- "sembast::src::api::store_ref.dart::StoreRef"
+"core::persistence::data_store.dart::DataStore" <|-- "core::persistence::sembast_data_store.dart::SembastDataStore"
+
+abstract class "core::persistence::data_store.dart::DataStore" {
+  +dynamic createProfile()
+  +dynamic setSelectedProfile()
+  +Stream profilesData()
+  +dynamic getProfilesData()
+  +dynamic profileExistsWithName()
+  +dynamic setFavouriteMovie()
+  +Stream favouriteMovie()
+  +Stream allSavedMovies()
+  +Stream favouriteMovieIDs()
+  +Stream favouriteMovies()
+}
+
+class "core::api::tmdb_api.dart::PosterSize" {
+  +int index
+  {static} +List<PosterSize> values
+  {static} +PosterSize w92
+  {static} +PosterSize w154
+  {static} +PosterSize w185
+  {static} +PosterSize w342
+  {static} +PosterSize w500
+  {static} +PosterSize w780
+  {static} +PosterSize original
+}
+
+"core::api::tmdb_api.dart::PosterSize" o-- "core::api::tmdb_api.dart::PosterSize"
+
+class "core::api::tmdb_api.dart::TMDBApi" {
+  {static} +String tmdbBaseUrl
+  {static} +String tmdbBaseImageUrl
+  {static} +String moviesNowPlaying()
+  {static} +String imageUrl()
+}
+
+class "core::api::tmdb_api.dart::TMDBClient" {
+  +dynamic nowPlayingMovies()
+}
+
+
+@enduml

@@ -1,0 +1,88 @@
+@startuml
+set namespaceSeparator ::
+
+class "movie_app_demo_flutter::app::profile_selection::profile_selection_page.dart::ProfileSelectionPage" {
+  +dynamic addProfile()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::app::profile_selection::profile_selection_page.dart::ProfileSelectionPage"
+
+class "movie_app_demo_flutter::app::favourites::favourites_page.dart::FavouritesPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::app::favourites::favourites_page.dart::FavouritesPage"
+
+class "movie_app_demo_flutter::app::create_profile::create_profile_page_builder.dart::CreateProfilePageBuilder" {
+  {static} +Widget create()
+  +dynamic createProfile()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::app::create_profile::create_profile_page_builder.dart::CreateProfilePageBuilder"
+
+class "movie_app_demo_flutter::app::create_profile::create_profile_cubit.dart::CreateProfileCubit" {
+  +DataStore dataStore
+  +dynamic createProfile()
+}
+
+"movie_app_demo_flutter::app::create_profile::create_profile_cubit.dart::CreateProfileCubit" o-- "core::persistence::data_store.dart::DataStore"
+"bloc::src::cubit.dart::Cubit<State>" <|-- "movie_app_demo_flutter::app::create_profile::create_profile_cubit.dart::CreateProfileCubit"
+
+class "movie_app_demo_flutter::app::app_startup::app_startup_cubit.dart::AppStartupCubit" {
+  +DataStore dataStore
+  -StreamSubscription _subscription
+  +dynamic close()
+  +void init()
+}
+
+"movie_app_demo_flutter::app::app_startup::app_startup_cubit.dart::AppStartupCubit" o-- "core::persistence::data_store.dart::DataStore"
+"movie_app_demo_flutter::app::app_startup::app_startup_cubit.dart::AppStartupCubit" o-- "dart::async::StreamSubscription"
+"bloc::src::cubit.dart::Cubit<State>" <|-- "movie_app_demo_flutter::app::app_startup::app_startup_cubit.dart::AppStartupCubit"
+
+class "movie_app_demo_flutter::app::app_startup::app_startup_page.dart::AppStartupPage" {
+  {static} +Widget create()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::app::app_startup::app_startup_page.dart::AppStartupPage"
+
+class "movie_app_demo_flutter::app::now_playing::now_playing_page.dart::NowPlayingPage" {
+  {static} +Key moviesGridKey
+  {static} +Widget create()
+  +Widget build()
+}
+
+"movie_app_demo_flutter::app::now_playing::now_playing_page.dart::NowPlayingPage" o-- "flutter::src::foundation::key.dart::Key"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::app::now_playing::now_playing_page.dart::NowPlayingPage"
+
+class "movie_app_demo_flutter::app::now_playing::favourite_movies_grid.dart::FavouritesMovieGrid" {
+  +List<TMDBMovieBasic> movies
+  +ScrollController controller
+  +Widget build()
+}
+
+"movie_app_demo_flutter::app::now_playing::favourite_movies_grid.dart::FavouritesMovieGrid" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::app::now_playing::favourite_movies_grid.dart::FavouritesMovieGrid"
+
+class "movie_app_demo_flutter::app::now_playing::now_playing_cubit.dart::NowPlayingCubit" {
+  +TMDBClient api
+  -int _page
+  -List<TMDBMovieBasic> _movies
+  -bool _canLoadNextPage
+  +void init()
+  +dynamic fetchNextPage()
+}
+
+"movie_app_demo_flutter::app::now_playing::now_playing_cubit.dart::NowPlayingCubit" o-- "core::api::tmdb_api.dart::TMDBClient"
+"bloc::src::cubit.dart::Cubit<State>" <|-- "movie_app_demo_flutter::app::now_playing::now_playing_cubit.dart::NowPlayingCubit"
+
+class "movie_app_demo_flutter::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "movie_app_demo_flutter::main.dart::MyApp"
+
+
+@enduml
